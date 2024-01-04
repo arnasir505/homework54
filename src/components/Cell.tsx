@@ -1,7 +1,19 @@
 import React from 'react';
 
-const Cell = () => {
-  return <div className='cell'></div>;
+interface CellProps {
+  id: string;
+  isClicked: boolean;
+  hasItem: boolean;
+  openCell: (id: string) => void;
+}
+
+const Cell: React.FC<CellProps> = ({ id, isClicked, hasItem, openCell }) => {
+  return (
+    <div
+      className={isClicked ? 'cell open' : 'cell'}
+      onClick={() => openCell(id)}
+    ></div>
+  );
 };
 
 export default Cell;

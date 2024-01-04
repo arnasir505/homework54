@@ -11,6 +11,7 @@ function App() {
         id: uuidv4(),
         hasItem: false,
         clicked: false,
+        handleClick: () => console.log('cell')
       };
       items.push(cell);
     }
@@ -22,9 +23,16 @@ function App() {
 
   const [items, setItems] = useState(createItems());
 
+  const foo = (id: any) => {
+    const index = items.findIndex((item) => item.id === id);
+    const itemsCopy = [...items];
+    itemsCopy[index].clicked = true;
+    setItems(itemsCopy)
+  }
+
   return (
     <div>
-      <Field items={items} />
+      <Field items={items} handleClick={foo}/>
       <button onClick={() => console.log(items)}>log items</button>
     </div>
   );
