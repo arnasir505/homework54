@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import './App.css';
+import Field from './components/Field';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const createItems = () => {
+    let items = [];
+    for (let i = 0; i < 36; i++) {
+      const cell = {
+        id: uuidv4(),
+        hasItem: false,
+        clicked: false,
+      };
+      items.push(cell);
+    }
+
+    const randomItem = items[Math.floor(Math.random() * items.length)];
+    randomItem.hasItem = true;
+    return items;
+  };
+
+  const [items, setItems] = useState(createItems());
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <Field items={items} />
+      <button onClick={() => console.log(items)}>log items</button>
+    </div>
+  );
 }
 
-export default App
+export default App;
