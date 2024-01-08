@@ -11,8 +11,10 @@ const Cell: React.FC<CellProps> = ({ id, isClicked, hasItem, openCell }) => {
   return (
     <div
       className={isClicked ? 'cell open' : 'cell'}
-      onClick={() => openCell(id)}
-    ></div>
+      onClick={isClicked ? () => {} : () => openCell(id)}
+    >
+      {hasItem ? <span className='ring'>🦊</span> : null}
+    </div>
   );
 };
 

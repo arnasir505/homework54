@@ -19,8 +19,32 @@
 
 .cell {
   background-color: #eee;
+  position: relative;
 }
 
 .cell.open {
-  background-color: #fff;
+  background-color: transparent;
+}
+
+.tries {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.ring {
+  position: absolute;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .field {
+    border: 2px solid #eee;
+  }
+  .cell.open {
+    background-color: transparent;
+  }
 }

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import Field from './components/Field';
+import Tries from './components/Tries';
+import ResetButton from './components/ResetButton';
 
 function App() {
   const createItems = () => {
@@ -11,7 +13,6 @@ function App() {
         id: uuidv4(),
         hasItem: false,
         clicked: false,
-        handleClick: () => console.log('cell')
       };
       items.push(cell);
     }
@@ -22,18 +23,24 @@ function App() {
   };
 
   const [items, setItems] = useState(createItems());
+  const [triesCount, setTriesCount] = useState(0);
 
-  const foo = (id: any) => {
+  const openCell = (id: any) => {
     const index = items.findIndex((item) => item.id === id);
     const itemsCopy = [...items];
     itemsCopy[index].clicked = true;
-    setItems(itemsCopy)
-  }
+    setItems(itemsCopy);
+    setTriesCount((prevState) => prevState + 1);
+  };
 
   return (
     <div>
-      <Field items={items} handleClick={foo}/>
-      <button onClick={() => console.log(items)}>log items</button>
+      <Field items={items} openCell={openCell} />
+      <Tries triesCount={triesCount} />
+      <ResetButton
+        resetField={() => setItems(createItems)}
+        resetTries={() => setTriesCount(0)}
+      />
     </div>
   );
 }

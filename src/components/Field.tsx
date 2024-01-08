@@ -9,17 +9,17 @@ type Item = {
 
 interface FieldProps {
   items: Item[];
-  handleClick: (id: string) => void;
+  openCell: (id: string) => void;
 }
 
-const Field: React.FC<FieldProps> = ({ items, handleClick }) => {
+const Field: React.FC<FieldProps> = ({ items, openCell }) => {
   const cells = items.map((item) => (
     <Cell
       key={item.id}
       isClicked={item.clicked}
       hasItem={item.hasItem}
       id={item.id}
-      openCell={handleClick}
+      openCell={openCell}
     />
   ));
   return <div className='field'>{cells}</div>;
