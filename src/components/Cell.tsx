@@ -13,7 +13,7 @@ const Cell: React.FC<CellProps> = ({ id, isClicked, hasItem, openCell }) => {
       className={isClicked ? 'cell open' : 'cell'}
       onClick={isClicked ? () => {} : () => openCell(id)}
     >
-      {hasItem ? <span className='ring'>🦊</span> : null}
+      {hasItem ? <span className='fox'>🦊</span> : null}
     </div>
   );
 };

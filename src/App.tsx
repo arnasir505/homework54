@@ -12,7 +12,7 @@ function App() {
       const cell = {
         id: uuidv4(),
         hasItem: false,
-        clicked: false,
+        isClicked: false,
       };
       items.push(cell);
     }
@@ -24,21 +24,30 @@ function App() {
 
   const [items, setItems] = useState(createItems());
   const [triesCount, setTriesCount] = useState(0);
+  const [gameEnded, setGameEnded] = useState(false);
 
   const openCell = (id: any) => {
     const index = items.findIndex((item) => item.id === id);
     const itemsCopy = [...items];
-    itemsCopy[index].clicked = true;
+    itemsCopy[index].isClicked = true;
     setItems(itemsCopy);
     setTriesCount((prevState) => prevState + 1);
   };
 
   return (
     <div>
-      <Field items={items} openCell={openCell} />
+      <Field
+        items={items}
+        openCell={openCell}
+        gameEnded={gameEnded}
+        endGame={() => setGameEnded(true)}
+      />
       <Tries triesCount={triesCount} />
       <ResetButton
-        resetField={() => setItems(createItems)}
+        resetField={() => {
+          setItems(createItems());
+          setGameEnded(false);
+        }}
         resetTries={() => setTriesCount(0)}
       />
     </div>

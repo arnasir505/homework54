@@ -1,8 +1,10 @@
 import React from 'react';
+
 interface ResetButtonProps {
   resetField: () => void;
   resetTries: () => void;
 }
+
 const ResetButton: React.FC<ResetButtonProps> = ({
   resetField,
   resetTries,
